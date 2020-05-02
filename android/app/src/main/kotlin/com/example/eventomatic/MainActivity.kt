@@ -1,4 +1,4 @@
-package com.example.eventomatic
+package com.pruthvipatel.eventomatic.flutter
 
 import androidx.annotation.NonNull;
 import io.flutter.embedding.android.FlutterActivity
