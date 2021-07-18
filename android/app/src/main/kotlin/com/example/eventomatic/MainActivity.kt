@@ -1,4 +1,4 @@
-package com.pruthvipatel.eventomatic.flutter
+package com.pruthvipatel.unlock.app
 
 import androidx.annotation.NonNull;
 import io.flutter.embedding.android.FlutterActivity

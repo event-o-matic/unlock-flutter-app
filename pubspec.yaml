@@ -1,5 +1,5 @@
-name: eventomatic
-description: A flutter application for volunteers
+name: unlock
+description: QR code scanner app
 
 # The following defines the version and build number for your application.
 # A version number is three numbers separated by dots, like 1.2.43
@@ -14,7 +14,7 @@ description: A flutter application for volunteers
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.1.0 <3.0.0"
+  sdk: ">=2.6.0 <3.0.0"
 
 dependencies:
   flutter:
@@ -26,6 +26,8 @@ dependencies:
   http: 0.12.0+2
   barcode_scan: ^1.0.0
   google_fonts: ^0.3.9
+  flare_flutter: ^3.0.1
+  flutter_svg: ^0.19.3
 
 dev_dependencies:
   flutter_launcher_icons: ^0.7.4
@@ -35,7 +37,7 @@ dev_dependencies:
 flutter_icons:
   android: "launcher_icon"
   ios: true
-  image_path: "logo.png"
+  image_path: "assets/logo.png"
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -47,9 +49,8 @@ flutter:
   # the material Icons class.
   uses-material-design: true
   # To add assets to your application, add an assets section, like this:
-  # assets:
-  #   - images/a_dot_burr.jpeg
-  #   - images/a_dot_ham.jpeg
+  assets:
+    - assets/
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
   # For details regarding adding assets from package dependencies, see
