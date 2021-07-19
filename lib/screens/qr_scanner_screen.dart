@@ -34,9 +34,10 @@ class _QRScannerScreenState extends State<QRScannerScreen> {
           mainAxisSize: MainAxisSize.min,
           children: [
             Logo(),
-            SizedBox(height: 40),
+            SizedBox(height: 20),
             _buildBody(),
           ],
+		  
         ),
       ),
       bottomNavigationBar: Padding(

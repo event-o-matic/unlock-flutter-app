@@ -14,7 +14,7 @@ class StudentCard extends StatelessWidget {
   Widget build(BuildContext context) {
     print(student.consentStatus);
     return AspectRatio(
-      aspectRatio: 10 / 16,
+      aspectRatio: 11 / 16,
       child: Card(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
         elevation: 4,
