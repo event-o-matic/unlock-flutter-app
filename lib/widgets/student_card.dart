@@ -1,7 +1,7 @@
 import 'package:unlock/models/student.dart';
 import 'package:flutter/material.dart';
 import 'package:unlock/utils/extentions.dart';
-import 'package:unlock/colors.dart';
+import 'package:unlock/utils/colors.dart';
 
 class StudentCard extends StatelessWidget {
   const StudentCard({Key key, this.student, this.isLoading, this.onReload})

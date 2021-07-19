@@ -1,17 +1,15 @@
 import 'dart:convert';
 import 'dart:io';
-
 import 'package:barcode_scan/barcode_scan.dart';
-import 'package:unlock/colors.dart';
+import 'package:unlock/utils/colors.dart';
 import 'package:unlock/models/student.dart';
+import 'package:unlock/utils/constants.dart';
 import 'package:unlock/widgets/error_card.dart';
 import 'package:unlock/widgets/student_card.dart';
 import 'package:unlock/widgets/logo.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
-
-const API_URL = "https://0afdc21cbaa7.ngrok.io/v1";
 
 class QRScannerScreen extends StatefulWidget {
   @override
@@ -123,7 +121,7 @@ class _QRScannerScreenState extends State<QRScannerScreen> {
       "$API_URL/students/${student.id}",
       headers: {"Content-type": "Application/json"},
     ).timeout(
-      Duration(seconds: 2),
+      Duration(seconds: 30),
       onTimeout: () => throw HttpException(
           "No response from server, please contact support team!"),
     );

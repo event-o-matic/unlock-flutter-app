@@ -1,5 +1,5 @@
-import 'package:unlock/colors.dart';
-import 'package:unlock/splash_screen.dart';
+import 'package:unlock/utils/colors.dart';
+import 'package:unlock/screens/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 

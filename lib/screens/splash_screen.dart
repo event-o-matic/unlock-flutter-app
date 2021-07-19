@@ -1,8 +1,9 @@
-import 'package:unlock/colors.dart';
-import 'package:unlock/qr_scanner_screen.dart';
-import 'package:unlock/widgets/logo.dart';
+import 'package:unlock/utils/colors.dart';
+import 'package:unlock/screens/qr_scanner_screen.dart';
+import 'package:unlock/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flare_flutter/flare_actor.dart';
+import 'package:http/http.dart' as http;
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key key}) : super(key: key);
@@ -12,8 +13,11 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+  String error;
+
   @override
   void initState() {
+    wakeupServer();
     Future.delayed(Duration(seconds: 5)).then(
       (_) => Navigator.pushReplacement(
         context,
@@ -22,7 +26,6 @@ class _SplashScreenState extends State<SplashScreen> {
         ),
       ),
     );
-
     super.initState();
   }
 
@@ -61,5 +64,16 @@ class _SplashScreenState extends State<SplashScreen> {
         ),
       ),
     );
+  }
+
+  Future wakeupServer() async {
+    print("Waking up server...");
+    setState(() => error = null);
+    final response = await http.get("$API_URL");
+
+    if (response.statusCode != 200) {
+      return print("Error occured while waking up the server!");
+    }
+    print("server woke up successfully...");
   }
 }

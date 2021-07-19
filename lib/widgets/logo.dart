@@ -1,4 +1,4 @@
-import 'package:unlock/colors.dart';
+import 'package:unlock/utils/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 

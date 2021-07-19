@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:unlock/colors.dart';
+import 'package:unlock/utils/colors.dart';
 
 class ErrorCard extends StatelessWidget {
   const ErrorCard({this.error, this.onClose});
@@ -45,10 +45,11 @@ class ErrorCard extends StatelessWidget {
                       ),
                     ),
                     Spacer(),
-                    IconButton(
-                      onPressed: onClose,
-                      icon: Icon(Icons.close, color: Colors.white),
-                    )
+                    if (onClose != null)
+                      IconButton(
+                        onPressed: onClose,
+                        icon: Icon(Icons.close, color: Colors.white),
+                      )
                   ],
                 ),
               ),
