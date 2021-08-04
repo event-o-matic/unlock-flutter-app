@@ -17,6 +17,8 @@ dependencies:
   flare_flutter: ^3.0.1
   flutter_svg: ^0.19.3
   url_launcher: ^6.0.9
+  pinch_zoom: ^1.0.0
+  flutter_screenutil: ^5.0.0+2
 
 dev_dependencies:
   flutter_launcher_icons: ^0.7.4

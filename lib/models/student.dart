@@ -6,18 +6,11 @@ class Student {
   String branch;
   String year;
   String semester;
-  bool consentStatus;
+  bool consentStatus = false;
+  String fileUrl;
 
-  Student(
-    this.id,
-    this.fullname,
-    this.school,
-    this.program,
-    this.branch,
-    this.year,
-    this.semester,
-    this.consentStatus,
-  );
+  Student(this.id, this.fullname, this.school, this.program, this.branch, this.year, this.semester, this.consentStatus,
+      this.fileUrl);
 
   Student.fromMap(Map<String, dynamic> map) {
     this.id = map['_id'];

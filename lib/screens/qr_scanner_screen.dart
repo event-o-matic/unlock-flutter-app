@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:barcode_scan/barcode_scan.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:unlock/utils/colors.dart';
 import 'package:unlock/models/student.dart';
 import 'package:unlock/utils/constants.dart';
@@ -37,7 +38,6 @@ class _QRScannerScreenState extends State<QRScannerScreen> {
             SizedBox(height: 20),
             _buildBody(),
           ],
-		  
         ),
       ),
       bottomNavigationBar: Padding(
@@ -45,12 +45,11 @@ class _QRScannerScreenState extends State<QRScannerScreen> {
         child: FloatingActionButton.extended(
           icon: Icon(
             Icons.qr_code,
-            size: 20,
+            size: ScreenUtil().setSp(20),
           ),
           label: Text("SCAN"),
           backgroundColor: ThemeColors.primary,
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
           onPressed: _scanQR,
         ),
       ),
@@ -119,35 +118,45 @@ class _QRScannerScreenState extends State<QRScannerScreen> {
     setState(() => isLoading = true);
 
     final response = await http.get(
-      "$API_URL/students/${student.id}",
+      "$API_URL/consent_received/${student.id}",
       headers: {"Content-type": "Application/json"},
     ).timeout(
       Duration(seconds: 30),
-      onTimeout: () => throw HttpException(
-          "No response from server, please contact support team!"),
+      onTimeout: () => throw HttpException("No response from server, please contact support team!"),
     );
 
-    if (response.statusCode != 200)
-      throw HttpException("${response.statusCode} - ${response.reasonPhrase}");
+    if (response.statusCode != 200) throw HttpException("${response.statusCode} - ${response.reasonPhrase}");
 
     final decodedResponse = jsonDecode(response.body);
 
-    if ((decodedResponse["error"] == null &&
-            decodedResponse["success"] == null) ||
-        (decodedResponse["success"] != null &&
-            decodedResponse["data"] == null)) {
+    Future _createStudent() async {
+      return http.post("http://27.109.7.68:8080/unlock/entry.php", body: {
+        "Roll_no": student.id,
+      });
+    }
+
+    /* if ((decodedResponse["error"] == null && decodedResponse["success"] == null) ||
+        (decodedResponse["success"] != null && decodedResponse["data"] == null)) {
       throw "Not proper response received from the API call!";
     }
-
     if (decodedResponse["error"] != null) {
       throw HttpException(decodedResponse["error"]);
+    } */
+
+    if (decodedResponse['data'] == null || decodedResponse['data']['Received'] == null)
+      throw "Not proper response received from the API call!";
+
+    if (decodedResponse['data']['Received'] && decodedResponse['data']['File_name'] == null) {
+      decodedResponse['data']['File_name'] = "$CONSENT_URL/${student.id}.png";
     }
 
-    if (decodedResponse['data']['consentStatus'] == null)
-      throw "['data']['consentStatus'] is not available in the API response!";
+    if (decodedResponse['data']['Received'] == true) {
+      await _createStudent();
+    }
 
     setState(() {
-      student.consentStatus = decodedResponse['data']['consentStatus'];
+      student.consentStatus = decodedResponse['data']['Received'];
+      student.fileUrl = decodedResponse['data']['File_name'];
       isLoading = false;
     });
   }
@@ -176,8 +185,7 @@ class _QRScannerScreenState extends State<QRScannerScreen> {
       if (e.message == "Invalid envelope")
         error = "You pressed the back button before scanning anything, RETRY!";
       else if ("$e".contains("${API_URL.split(RegExp(r"/+"))[1]} not found"))
-        error =
-            "Internal Client Error: Invalid `API URL`.\nPlease contact support team!";
+        error = "Internal Client Error: Invalid `API URL`.\nPlease contact support team!";
       else
         error = "$e";
     } catch (e, trace) {
