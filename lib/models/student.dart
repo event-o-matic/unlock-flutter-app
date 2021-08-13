@@ -9,8 +9,8 @@ class Student {
   bool consentStatus = false;
   String fileUrl;
 
-  Student(this.id, this.fullname, this.school, this.program, this.branch, this.year, this.semester, this.consentStatus,
-      this.fileUrl);
+  Student(this.id, this.fullname, this.school, this.program, this.branch,
+      this.year, this.semester, this.consentStatus, this.fileUrl);
 
   Student.fromMap(Map<String, dynamic> map) {
     this.id = map['_id'];
@@ -19,6 +19,6 @@ class Student {
     this.program = map['program'];
     this.branch = map['branch'];
     this.year = map['year'];
-    this.semester = map['semester'];
+    // this.semester = map['semester'];
   }
 }

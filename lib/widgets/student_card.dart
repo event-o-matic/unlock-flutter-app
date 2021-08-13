@@ -7,7 +7,8 @@ import 'package:unlock/utils/colors.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class StudentCard extends StatelessWidget {
-  const StudentCard({Key key, this.student, this.isLoading, this.onReload}) : super(key: key);
+  const StudentCard({Key key, this.student, this.isLoading, this.onReload})
+      : super(key: key);
   final Student student;
   final bool isLoading;
   final Function(Student) onReload;
@@ -52,7 +53,8 @@ class StudentCard extends StatelessWidget {
             Expanded(
               flex: 5,
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
@@ -71,7 +73,9 @@ class StudentCard extends StatelessWidget {
                     Text(
                       student.fullname.toLowerCase().capitalize() ?? "",
                       textAlign: TextAlign.center,
-                      style: TextStyle(fontSize: ScreenUtil().setSp(16), fontWeight: FontWeight.bold),
+                      style: TextStyle(
+                          fontSize: ScreenUtil().setSp(16),
+                          fontWeight: FontWeight.bold),
                     ),
                     Text(
                       "ID: ${student?.id}",
@@ -86,7 +90,8 @@ class StudentCard extends StatelessWidget {
                           TableCell(
                             child: Text(
                               "Program",
-                              style: TextStyle(fontSize: ScreenUtil().setSp(14)),
+                              style:
+                                  TextStyle(fontSize: ScreenUtil().setSp(14)),
                             ),
                           ),
                           TableCell(
@@ -95,17 +100,20 @@ class StudentCard extends StatelessWidget {
                             style: TextStyle(fontSize: ScreenUtil().setSp(14)),
                           )),
                         ]),
-                        if (student?.branch != null && student.branch.isNotEmpty)
+                        if (student?.branch != null &&
+                            student.branch.isNotEmpty)
                           TableRow(children: [
                             TableCell(
                                 child: Text(
                               "Branch",
-                              style: TextStyle(fontSize: ScreenUtil().setSp(14)),
+                              style:
+                                  TextStyle(fontSize: ScreenUtil().setSp(14)),
                             )),
                             TableCell(
                                 child: Text(
                               ": ${student?.branch}",
-                              style: TextStyle(fontSize: ScreenUtil().setSp(14)),
+                              style:
+                                  TextStyle(fontSize: ScreenUtil().setSp(14)),
                             )),
                           ]),
                         TableRow(children: [
@@ -118,13 +126,16 @@ class StudentCard extends StatelessWidget {
                               ? (TableCell(
                                   child: Text(
                                     ": ${student?.year} ",
-                                    style: TextStyle(fontSize: ScreenUtil().setSp(14)),
+                                    style: TextStyle(
+                                        fontSize: ScreenUtil().setSp(14)),
                                   ),
                                 ))
                               : (TableCell(
                                   child: Text(
-                                    ": " + int.tryParse(student?.year).ordinal(),
-                                    style: TextStyle(fontSize: ScreenUtil().setSp(14)),
+                                    ": " +
+                                        int.tryParse(student?.year).ordinal(),
+                                    style: TextStyle(
+                                        fontSize: ScreenUtil().setSp(14)),
                                   ),
                                 ))
                         ]),
@@ -138,13 +149,15 @@ class StudentCard extends StatelessWidget {
                               ? (TableCell(
                                   child: Text(
                                     ": ${student?.semester} ",
-                                    style: TextStyle(fontSize: ScreenUtil().setSp(14)),
+                                    style: TextStyle(
+                                        fontSize: ScreenUtil().setSp(14)),
                                   ),
                                 ))
                               : (TableCell(
                                   child: Text(
-                                    ": Sem - " + int.tryParse(student?.semester).toRoman(),
-                                    style: TextStyle(fontSize: ScreenUtil().setSp(14)),
+                                    ": Sem - ${student?.semester}",
+                                    style: TextStyle(
+                                        fontSize: ScreenUtil().setSp(14)),
                                   ),
                                 ))
                         ]),
@@ -160,11 +173,14 @@ class StudentCard extends StatelessWidget {
                                   Row(
                                     children: [
                                       Padding(
-                                        padding: const EdgeInsets.only(right: 4.0),
+                                        padding:
+                                            const EdgeInsets.only(right: 4.0),
                                         child: MaterialButton(
                                           height: ScreenUtil().setHeight(30),
                                           elevation: 0,
-                                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                                          shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(10)),
                                           color: ThemeColors.primary,
                                           onPressed: () => onReload(student),
                                           child: Row(
@@ -178,7 +194,10 @@ class StudentCard extends StatelessWidget {
                                               SizedBox(width: 5),
                                               Text(
                                                 "Reload Status",
-                                                style: TextStyle(color: Colors.white, fontSize: ScreenUtil().setSp(10)),
+                                                style: TextStyle(
+                                                    color: Colors.white,
+                                                    fontSize:
+                                                        ScreenUtil().setSp(10)),
                                               ),
                                             ],
                                           ),
@@ -187,9 +206,12 @@ class StudentCard extends StatelessWidget {
                                       MaterialButton(
                                         height: ScreenUtil().setHeight(30),
                                         elevation: 0,
-                                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                                        shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(10)),
                                         color: ThemeColors.primary,
-                                        onPressed: () => {showDialogBox(context)},
+                                        onPressed: () =>
+                                            {showDialogBox(context)},
                                         child: Row(
                                           mainAxisSize: MainAxisSize.min,
                                           children: [
@@ -201,7 +223,10 @@ class StudentCard extends StatelessWidget {
                                             SizedBox(width: 5.0),
                                             Text(
                                               "View Consent",
-                                              style: TextStyle(color: Colors.white, fontSize: ScreenUtil().setSp(10)),
+                                              style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize:
+                                                      ScreenUtil().setSp(10)),
                                             )
                                           ],
                                         ),
@@ -216,9 +241,12 @@ class StudentCard extends StatelessWidget {
                                   MaterialButton(
                                     height: ScreenUtil().setHeight(30),
                                     elevation: 0,
-                                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(10)),
                                     color: ThemeColors.primary,
-                                    onPressed: () => {showUserDialogBox(context)},
+                                    onPressed: () =>
+                                        {showUserDialogBox(context)},
                                     child: Row(
                                       mainAxisSize: MainAxisSize.min,
                                       children: [
@@ -230,7 +258,9 @@ class StudentCard extends StatelessWidget {
                                         SizedBox(width: 5.0),
                                         Text(
                                           "View Photo",
-                                          style: TextStyle(color: Colors.white, fontSize: ScreenUtil().setSp(10)),
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: ScreenUtil().setSp(10)),
                                         )
                                       ],
                                     ),
@@ -247,7 +277,8 @@ class StudentCard extends StatelessWidget {
                                 child: MaterialButton(
                                   height: ScreenUtil().setHeight(30),
                                   elevation: 0,
-                                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(10)),
                                   color: ThemeColors.primary,
                                   onPressed: () => onReload(student),
                                   child: Row(
@@ -261,7 +292,9 @@ class StudentCard extends StatelessWidget {
                                       SizedBox(width: 5),
                                       Text(
                                         "Reload Status",
-                                        style: TextStyle(color: Colors.white, fontSize: ScreenUtil().setSp(10)),
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: ScreenUtil().setSp(10)),
                                       ),
                                     ],
                                   ),
@@ -270,7 +303,8 @@ class StudentCard extends StatelessWidget {
                               MaterialButton(
                                 height: ScreenUtil().setHeight(30),
                                 elevation: 0,
-                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10)),
                                 color: ThemeColors.primary,
                                 onPressed: () => {showUserDialogBox(context)},
                                 child: Row(
@@ -284,7 +318,9 @@ class StudentCard extends StatelessWidget {
                                     SizedBox(width: 5.0),
                                     Text(
                                       "View Photo",
-                                      style: TextStyle(color: Colors.white, fontSize: ScreenUtil().setSp(10)),
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: ScreenUtil().setSp(10)),
                                     )
                                   ],
                                 ),
@@ -313,12 +349,17 @@ class StudentCard extends StatelessWidget {
       );
 
     if (student.consentStatus == null) {
-      return Text("ERROR", style: TextStyle(color: Colors.yellow, fontSize: 16));
+      return Text("ERROR",
+          style: TextStyle(color: Colors.yellow, fontSize: 16));
     }
 
     return student.consentStatus
-        ? Text("Consent Form has submitted!", style: TextStyle(color: Colors.green, fontSize: ScreenUtil().setSp(15)))
-        : Text("Consent is not submitted!", style: TextStyle(color: Colors.red, fontSize: ScreenUtil().setSp(15)));
+        ? Text("Consent Form has submitted!",
+            style: TextStyle(
+                color: Colors.green, fontSize: ScreenUtil().setSp(15)))
+        : Text("Consent is not submitted!",
+            style:
+                TextStyle(color: Colors.red, fontSize: ScreenUtil().setSp(15)));
   }
 
   ImageProvider _buildStatusIcon() {
@@ -328,7 +369,9 @@ class StudentCard extends StatelessWidget {
       return AssetImage("assets/warning.png");
     }
 
-    return student.consentStatus ? AssetImage("assets/checked.png") : AssetImage("assets/cancel.png");
+    return student.consentStatus
+        ? AssetImage("assets/checked.png")
+        : AssetImage("assets/cancel.png");
   }
 
   showDialogBox(context) {
@@ -350,12 +393,15 @@ class StudentCard extends StatelessWidget {
                         padding: EdgeInsets.all(5),
                         width: 300.0,
                         height: 70.0,
-                        decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(10)),
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(10)),
                         child: Center(
                           child: Text(
                             "Consent Form Unavailable",
                             textAlign: TextAlign.center,
-                            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                            style: TextStyle(
+                                fontSize: 18, fontWeight: FontWeight.bold),
                           ),
                         ),
                       ),
@@ -387,12 +433,15 @@ class StudentCard extends StatelessWidget {
                         padding: EdgeInsets.all(5),
                         width: 300.0,
                         height: 70.0,
-                        decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(10)),
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(10)),
                         child: Center(
                           child: Text(
                             "Photo Unavailable",
                             textAlign: TextAlign.center,
-                            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                            style: TextStyle(
+                                fontSize: 18, fontWeight: FontWeight.bold),
                           ),
                         ),
                       ),

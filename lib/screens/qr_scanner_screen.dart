@@ -49,7 +49,8 @@ class _QRScannerScreenState extends State<QRScannerScreen> {
           ),
           label: Text("SCAN"),
           backgroundColor: ThemeColors.primary,
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
           onPressed: _scanQR,
         ),
       ),
@@ -122,10 +123,12 @@ class _QRScannerScreenState extends State<QRScannerScreen> {
       headers: {"Content-type": "Application/json"},
     ).timeout(
       Duration(seconds: 30),
-      onTimeout: () => throw HttpException("No response from server, please contact support team!"),
+      onTimeout: () => throw HttpException(
+          "No response from server, please contact support team!"),
     );
 
-    if (response.statusCode != 200) throw HttpException("${response.statusCode} - ${response.reasonPhrase}");
+    if (response.statusCode != 200)
+      throw HttpException("${response.statusCode} - ${response.reasonPhrase}");
 
     final decodedResponse = jsonDecode(response.body);
 
@@ -143,10 +146,12 @@ class _QRScannerScreenState extends State<QRScannerScreen> {
       throw HttpException(decodedResponse["error"]);
     } */
 
-    if (decodedResponse['data'] == null || decodedResponse['data']['Received'] == null)
+    if (decodedResponse['data'] == null ||
+        decodedResponse['data']['Received'] == null)
       throw "Not proper response received from the API call!";
 
-    if (decodedResponse['data']['Received'] && decodedResponse['data']['File_name'] == null) {
+    if (decodedResponse['data']['Received'] &&
+        decodedResponse['data']['File_name'] == null) {
       decodedResponse['data']['File_name'] = "$CONSENT_URL/${student.id}.png";
     }
 
@@ -157,6 +162,7 @@ class _QRScannerScreenState extends State<QRScannerScreen> {
     setState(() {
       student.consentStatus = decodedResponse['data']['Received'];
       student.fileUrl = decodedResponse['data']['File_name'];
+      student.semester = decodedResponse['data']['Sem'];
       isLoading = false;
     });
   }
@@ -185,7 +191,8 @@ class _QRScannerScreenState extends State<QRScannerScreen> {
       if (e.message == "Invalid envelope")
         error = "You pressed the back button before scanning anything, RETRY!";
       else if ("$e".contains("${API_URL.split(RegExp(r"/+"))[1]} not found"))
-        error = "Internal Client Error: Invalid `API URL`.\nPlease contact support team!";
+        error =
+            "Internal Client Error: Invalid `API URL`.\nPlease contact support team!";
       else
         error = "$e";
     } catch (e, trace) {
