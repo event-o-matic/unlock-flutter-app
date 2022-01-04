@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
-import 'package:barcode_scan/barcode_scan.dart';
+import 'package:barcode_scan2/barcode_scan2.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:unlock/utils/colors.dart';
 import 'package:unlock/models/student.dart';
@@ -119,7 +119,7 @@ class _QRScannerScreenState extends State<QRScannerScreen> {
     setState(() => isLoading = true);
 
     final response = await http.get(
-      "$API_URL/consent_received/${student.id}",
+      Uri.parse("$API_URL/consent_received/${student.id}"),
       headers: {"Content-type": "Application/json"},
     ).timeout(
       Duration(seconds: 30),
@@ -133,7 +133,8 @@ class _QRScannerScreenState extends State<QRScannerScreen> {
     final decodedResponse = jsonDecode(response.body);
 
     Future _createStudent() async {
-      return http.post("http://27.109.7.68:8080/unlock/entry.php", body: {
+      return http
+          .post(Uri.parse("http://27.109.7.68:8080/unlock/entry.php"), body: {
         "Roll_no": student.id,
       });
     }
@@ -174,15 +175,15 @@ class _QRScannerScreenState extends State<QRScannerScreen> {
       student = null;
     });
     try {
-      String qrResult = await BarcodeScanner.scan();
+      final qrResult = await BarcodeScanner.scan();
 
       setState(() {
-        student = Student.fromMap(jsonDecode(qrResult));
+        student = Student.fromMap(jsonDecode(qrResult.rawContent));
       });
 
       await _checkStatus(student);
     } on PlatformException catch (e) {
-      error = e.code == BarcodeScanner.CameraAccessDenied
+      error = e.code == BarcodeScanner.cameraAccessDenied
           ? "Camera permission was denied, RETRY or go to `app settings` and accept the camera permission to continue!"
           : "Unknown Error: $e";
     } on HttpException catch (e) {

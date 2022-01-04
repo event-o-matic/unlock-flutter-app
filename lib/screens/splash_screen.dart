@@ -69,7 +69,7 @@ class _SplashScreenState extends State<SplashScreen> {
   Future wakeupServer() async {
     print("Waking up server...");
     setState(() => error = null);
-    final response = await http.get("$API_URL");
+    final response = await http.get(Uri.parse("$API_URL"));
 
     if (response.statusCode != 200) {
       return print("Error occured while waking up the server!");
